@@ -1,0 +1,93 @@
+@import "{{ site.theme }}";
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Estilos para encabezados */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Estilos para secciones */
+.section {
+    margin-bottom: 30px;
+}
+
+.section h2 {
+    color: #007bff;
+}
+
+.section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Estilos para advertencia */
+.warning {
+    background-color: #ffc107;
+    color: #333;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+/* Estilos para listas */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+/* Estilos para imágenes */
+.img-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.img-container img {
+    max-width: 45%;
+    height: auto;
+}
+
+/* Estilos para combobox */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para botones */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
