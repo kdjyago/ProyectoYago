@@ -1,14 +1,13 @@
 # Proyecto Yago: Calculadora
 
 > **Warning**
-> El proyecto deberá venir empaquetado como mínimo en un único fichero **jar**, y opcionalmente, en un ejecutable de Windows para poder ejecutarse.
+> El proyecto contiene un **jar**.
 
-## Parte 1
+## Calculadora Normal
 
-Mejora la calculadora de la práctica anterior agregándole un **menú superior** que permita alternar entre la calculadora **normal** y una nueva calculadora **científica** que se cargará dentro del mismo *Stage*.
+Calculadora Normal que operaciones básicas.
 
-- El menú superior mostrará también dos entradas de *Edición* y *Ayuda*.
-- La **calculadora científica** deberá tener al menos las operaciones trigonométricas y exponenciales o porcentajes.
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
 
 ![](media/Calc1.png) 
 
