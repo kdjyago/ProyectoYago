@@ -1,33 +1,35 @@
 # Proyecto Yago: Calculadora
 
 > **Warning**
-> El proyecto deberá venir empaquetado como mínimo en un único fichero **jar**, y opcionalmente, en un ejecutable de Windows para poder ejecutarse.
+> El proyecto contiene un **jar**.
 
-## Parte 1
+## Calculadora Normal
 
-Mejora la calculadora de la práctica anterior agregándole un **menú superior** que permita alternar entre la calculadora **normal** y una nueva calculadora **científica** que se cargará dentro del mismo *Stage*.
+Calculadora Normal que operaciones básicas.
 
-- El menú superior mostrará también dos entradas de *Edición* y *Ayuda*.
-- La **calculadora científica** deberá tener al menos las operaciones trigonométricas y exponenciales o porcentajes.
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- A demás utiliza la funcion de guardar datos en memoria.
 
-![](media/bdec2b6b440937887cd40bd8192d909d.png) 
+![](media/Calc1.png) 
 
 
-## Parte 2
+## Calculadora Científica
 
-Agrega otra opción al menú para tener una **calculadora de conversiones**.
+La **calculadora científica** realiza operaciones trigonométricas y exponenciales o porcentajes.
 
-- El *sistema de conversiones* deberá tener un *Combobox* principal para seleccionar el método de conversión; deberá poder hacer 3 tipos de conversiones, incluída la monetaria (agregar otras como longitud, tiempo, etc.). 
-- Se deberán agregar dos *combobox* de valor de origen y valor destino. 
-- Para las conversiones monetarias se deberá fijar el *valor de conversión* desde otra **ventana modal** que se abrirá desde el menú Edición.
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- A demás utiliza la funcion de guardar datos en memoria, mostrarlos por pantalla.
+- Contiene un **historial** de operaciones sencillo que utilice un *listView* para almacenarlos.
 
-![](media/126bf43674a0d594d81f65c6646a27ef.png) ![](media/VentanaValorconversiones-Calculadora.png) 
+![](media/Calc2.png) ![](media/VentanaValorconversiones-Calculadora.png)
 
 ## Parte 3 (opcional)
 
-Realiza algunas de estas mejoras propuestas:
+El *sistema de conversiones* contiene un *Combobox* principal para seleccionar el método de conversión; con 3 tipos de conversiones, incluye la monetaria, longitud y temperatura. 
 
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- Se deberán agregar dos *combobox* de valor de origen y valor destino. 
+- Para las conversiones monetarias se deberá fijar el *valor de conversión* desde otra **ventana modal** que se abrirá desde el menú Edición.
 - Agrega un **historial** de operaciones sencillo que utilice un *listView* para almacenarlos.
-- Agrega un acceso a una **API** para obtener el valor del cambio.
-- Agrega **Responsividad** a la calculadora científica de forma que la ventana sea redimensionable. Si a la calculadora científica se le reduce el tamaño pasará a ser calculadora normal y si se vuelve a ampliar calculadora científica.
-- Agrega una **gráfica** para representar funciones matemáticas.
+
+  ![](media/Calc3.png)
