@@ -8,27 +8,28 @@
 Calculadora Normal que operaciones básicas.
 
 - Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- A demás utiliza la funcion de guardar datos en memoria.
 
 ![](media/Calc1.png) 
 
 
-## Parte 2
+## Calculadora Científica
 
-Agrega otra opción al menú para tener una **calculadora de conversiones**.
+La **calculadora científica** realiza operaciones trigonométricas y exponenciales o porcentajes.
 
-- El *sistema de conversiones* deberá tener un *Combobox* principal para seleccionar el método de conversión; deberá poder hacer 3 tipos de conversiones, incluída la monetaria (agregar otras como longitud, tiempo, etc.). 
-- Se deberán agregar dos *combobox* de valor de origen y valor destino. 
-- Para las conversiones monetarias se deberá fijar el *valor de conversión* desde otra **ventana modal** que se abrirá desde el menú Edición.
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- A demás utiliza la funcion de guardar datos en memoria, mostrarlos por pantalla.
+- Contiene un **historial** de operaciones sencillo que utilice un *listView* para almacenarlos.
 
-![](media/Calc2.png) ![](media/VentanaValorconversiones-Calculadora.png) 
+![](media/Calc2.png) ![](media/VentanaValorconversiones-Calculadora.png)
 
 ## Parte 3 (opcional)
 
-Realiza algunas de estas mejoras propuestas:
+El *sistema de conversiones* contiene un *Combobox* principal para seleccionar el método de conversión; con 3 tipos de conversiones, incluye la monetaria, longitud y temperatura. 
 
+- Contiene un menú superior con dos entradas de *Calculadoras*, *Edición* y *Ayuda*.
+- Se deberán agregar dos *combobox* de valor de origen y valor destino. 
+- Para las conversiones monetarias se deberá fijar el *valor de conversión* desde otra **ventana modal** que se abrirá desde el menú Edición.
 - Agrega un **historial** de operaciones sencillo que utilice un *listView* para almacenarlos.
-- Agrega un acceso a una **API** para obtener el valor del cambio.
-- Agrega **Responsividad** a la calculadora científica de forma que la ventana sea redimensionable. Si a la calculadora científica se le reduce el tamaño pasará a ser calculadora normal y si se vuelve a ampliar calculadora científica.
-- Agrega una **gráfica** para representar funciones matemáticas.
 
   ![](media/Calc3.png)
