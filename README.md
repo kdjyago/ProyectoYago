@@ -23,7 +23,7 @@ La **calculadora científica** realiza operaciones trigonométricas y exponencia
 
 ![](media/Calc2.png) ![](media/CalcP.png)
 
-## Parte 3 (opcional)
+## Calculadora Conversiones
 
 El *sistema de conversiones* contiene un *Combobox* principal para seleccionar el método de conversión; con 3 tipos de conversiones, incluye la monetaria, longitud y temperatura. 
 
