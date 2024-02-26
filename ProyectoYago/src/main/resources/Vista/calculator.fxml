@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="calculadoraN" alignment="CENTER" prefHeight="450.0" prefWidth="300.0" style="-fx-background-color: #E0FFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.controladorCALCU">
+   <MenuBar>
+      <menus>
+         <Menu mnemonicParsing="false" text="Calculadoras">
+            <items>
+               <MenuItem fx:id="calcCI" mnemonicParsing="false" onAction="#calcCI" text="Calculadora Cientifica" />
+               <MenuItem fx:id="calcC" mnemonicParsing="false" onAction="#calcC" text="Calculadora Conversiones" />
+            </items>
+         </Menu>
+         <Menu mnemonicParsing="false" text="Edicion" />
+         <Menu mnemonicParsing="false" text="Ayuda" />
+      </menus>
+      <VBox.margin>
+         <Insets top="-80.0" />
+      </VBox.margin>
+   </MenuBar>
+    <TextField fx:id="displayField" alignment="CENTER_RIGHT" editable="false" maxHeight="60.0" maxWidth="215.0" minHeight="39.0" minWidth="60.0" prefHeight="39.0" prefWidth="215.0" VBox.vgrow="NEVER">
+        <VBox.margin>
+            <Insets bottom="10.0" top="30.0" />
+        </VBox.margin></TextField>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button fx:id="btnM1" mnemonicParsing="false" onAction="#addToMemory" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #48D1CC; -fx-background-radius: 15;" text="M+">
+            <HBox.margin>
+                <Insets bottom="10.0" />
+            </HBox.margin>
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnM2" mnemonicParsing="false" onAction="#subtractFromMemory" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #48D1CC; -fx-background-radius: 15;" text="M-">
+            <HBox.margin>
+                <Insets bottom="10.0" />
+            </HBox.margin>
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnC" mnemonicParsing="false" onAction="#reset" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #48D1CC; -fx-background-radius: 15;" text="C">
+            <HBox.margin>
+                <Insets bottom="10.0" />
+            </HBox.margin>
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnDivide" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #ADD8E6; -fx-background-radius: 15;" text="/">
+            <HBox.margin>
+                <Insets bottom="10.0" />
+            </HBox.margin>
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button fx:id="btn7" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="7">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn8" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="8">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn9" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="9">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btnMultiply" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #ADD8E6; -fx-background-radius: 15;" text="x">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button fx:id="btn4" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="4">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn5" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="5">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn6" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="6">
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btnSubtract" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #ADD8E6; -fx-background-radius: 15;" text="-">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <HBox.margin>
+            <Insets bottom="10.0" />
+         </HBox.margin></Button>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button fx:id="btn1" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="1">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn2" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="2">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btn3" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="3">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #ADD8E6; -fx-background-radius: 15;" text="+">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+    </HBox>
+    <HBox alignment="CENTER" spacing="5.0">
+        <Button fx:id="btn0" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #7FFFD4; -fx-background-radius: 15;" text="0">
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+        <Button fx:id="btnDecimal" mnemonicParsing="false" onAction="#addToDisplay" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #87CEFA; -fx-background-radius: 15;" text=".">
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="btnMasMenos" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #87CEFA; -fx-background-radius: 15;" text="+-">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+      </Button>
+        <Button fx:id="btnEquals" mnemonicParsing="false" onAction="#processOperator" prefHeight="45.0" prefWidth="45.0" style="-fx-background-color: #66CDAA; -fx-background-radius: 15;" text="=">
+         <HBox.margin>
+            <Insets top="10.0" />
+         </HBox.margin>
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+    </HBox>
+</VBox>
