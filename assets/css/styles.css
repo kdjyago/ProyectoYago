@@ -1,11 +1,8 @@
 @import "{{ site.theme }}";
 
-/* Estilos para el contenido proporcionado */
 #proyecto-yago-calculadora {
-    /* Estilos específicos para el contenido del proyecto */
 }
 
-/* Estilos para los encabezados */
 #proyecto-yago-calculadora h1 {
     color: #333;
     font-size: 24px;
@@ -16,7 +13,6 @@
     font-size: 20px;
 }
 
-/* Estilos para las imágenes */
 #proyecto-yago-calculadora img {
     max-width: 100%;
     height: auto;
