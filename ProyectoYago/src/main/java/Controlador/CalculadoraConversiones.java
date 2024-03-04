@@ -48,17 +48,27 @@ public class CalculadoraConversiones implements Initializable {
         sourceValueComboBox.getItems().clear();
         targetValueComboBox.getItems().clear();
 
-        String conversionType = conversionTypeComboBox.getValue();
-        if (conversionType.equals("Longitud")) {
-            sourceValueComboBox.getItems().addAll("Metros", "KM", "Millas");
-            targetValueComboBox.getItems().addAll("Metros", "KM", "Millas");
-        } else if (conversionType.equals("Temp")) {
-            sourceValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
-            targetValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+        try {
+            String conversionType = conversionTypeComboBox.getValue();
+            if (conversionType.equals("Longitud")) {
+                sourceValueComboBox.getItems().addAll("Metros", "KM", "Millas");
+                targetValueComboBox.getItems().addAll("Metros", "KM", "Millas");
+            } else if (conversionType.equals("Temp")) {
+                sourceValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+                targetValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+            }
+
+            // Verificar si hay elementos en las listas antes de establecer sus valores predeterminados
+            if (!sourceValueComboBox.getItems().isEmpty()) {
+                sourceValueComboBox.setValue(sourceValueComboBox.getItems().get(0));
+            }
+            if (!targetValueComboBox.getItems().isEmpty()) {
+                targetValueComboBox.setValue(targetValueComboBox.getItems().get(0));
+            }
+        } catch (NullPointerException e) {
         }
-        sourceValueComboBox.setValue(sourceValueComboBox.getItems().get(0));
-        targetValueComboBox.setValue(targetValueComboBox.getItems().get(0));
     }
+
 
 
 
@@ -166,7 +176,24 @@ public class CalculadoraConversiones implements Initializable {
         // Mostrar la ventana
         stageWindow.showAndWait();
         // Actualizar el Label con el texto modificado
-        resultLabel.setText(controlador.getTexto());
+
+        conversionTypeComboBox.getItems().clear();
+        if (controlador.getCheckLong().isSelected() && controlador.getCheckTemp().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Longitud", "Temp");
+            conversionTypeComboBox.setValue("Longitud");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckLong().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Longitud");
+            conversionTypeComboBox.setValue("Longitud");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckTemp().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Temp");
+            conversionTypeComboBox.setValue("Temp");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        }
     }
 
     public void setResultLabelText(String text) {

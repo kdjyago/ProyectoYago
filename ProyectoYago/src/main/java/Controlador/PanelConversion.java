@@ -4,6 +4,8 @@ import Modelo.ModeloPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -11,23 +13,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PanelConversion implements Initializable {
-    @FXML
-    private TextField val_tv;
     private ModeloPanel mp;
     private CalculadoraConversiones calculadora; // Referencia a CalculadoraConversiones
     private Stage secondStage;
+    @FXML
+    private Button confirmar_val_btn;
+    @FXML
+    private Button volver_val_btn;
+    @FXML
+    private CheckBox checkLong;
+    @FXML
+    private CheckBox checkTemp;
 
+    @FXML
     public void confirmar(ActionEvent actionEvent) {
-        // Obtener el texto del TextField
-        String texto = val_tv.getText();
         // Establecer el texto en resultLabel de CalculadoraConversiones
-        calculadora.setResultLabelText(texto);
+        //calculadora.setResultLabelText(texto);
         // Cerrar la ventana
         if (secondStage != null) { // Verificar si secondStage es nulo
             secondStage.close(); // Cerrar la ventana solo si secondStage no es nulo
         }
     }
 
+    @FXML
     public void volver(ActionEvent actionEvent) {
         // Cerrar la ventana
         secondStage.close();
@@ -39,15 +47,9 @@ public class PanelConversion implements Initializable {
 
     public void setModelo(ModeloPanel modelo) {
         this.mp = modelo;
-        // Establecer el texto en el TextField si el modelo tiene un texto no nulo
-        if (mp.getTexto() != null) {
-            val_tv.setText(mp.getTexto());
-        }
     }
 
-    public String getTexto() {
-        return val_tv.getText();
-    }
+
 
     public void setCalculadora(CalculadoraConversiones calculadora) {
         this.calculadora = calculadora;
@@ -55,5 +57,13 @@ public class PanelConversion implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
+
+    public CheckBox getCheckLong() {
+        return checkLong;
+    }
+
+    public CheckBox getCheckTemp() {
+        return checkTemp;
     }
 }
