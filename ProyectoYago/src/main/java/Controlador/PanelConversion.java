@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,11 +23,11 @@ public class PanelConversion implements Initializable {
     private CheckBox checkLong;
     @FXML
     private CheckBox checkTemp;
+    @FXML
+    private CheckBox moneda;
 
     @FXML
     public void confirmar(ActionEvent actionEvent) {
-        // Establecer el texto en resultLabel de CalculadoraConversiones
-        //calculadora.setResultLabelText(texto);
         // Cerrar la ventana
         if (secondStage != null) { // Verificar si secondStage es nulo
             secondStage.close(); // Cerrar la ventana solo si secondStage no es nulo
@@ -65,5 +64,9 @@ public class PanelConversion implements Initializable {
 
     public CheckBox getCheckTemp() {
         return checkTemp;
+    }
+
+    public CheckBox getCheckMoneda() {
+        return moneda;
     }
 }

@@ -1,26 +1,36 @@
 package Controlador;
 
 import Modelo.ModeloPanel;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CalculadoraConversiones implements Initializable {
+
+    private final String API_BASE_URL = "https://www.frankfurter.app/";
+
+    // Métodos de la API para obtener tasas de cambio
+    private final String LATEST_RATES_ENDPOINT = "latest";
 
     @FXML
     private ComboBox<String> conversionTypeComboBox;
@@ -37,7 +47,7 @@ public class CalculadoraConversiones implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        conversionTypeComboBox.getItems().addAll("Longitud", "Temp");
+        conversionTypeComboBox.getItems().addAll("Longitud", "Temp", "Moneda");
         conversionTypeComboBox.setValue("Longitud");
         conversionTypeComboBox.setOnAction(event -> updateUnits());
         updateUnits();
@@ -50,12 +60,35 @@ public class CalculadoraConversiones implements Initializable {
 
         try {
             String conversionType = conversionTypeComboBox.getValue();
-            if (conversionType.equals("Longitud")) {
-                sourceValueComboBox.getItems().addAll("Metros", "KM", "Millas");
-                targetValueComboBox.getItems().addAll("Metros", "KM", "Millas");
-            } else if (conversionType.equals("Temp")) {
-                sourceValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
-                targetValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+            if (conversionType != null) {
+                if (conversionType.equals("Longitud")) {
+                    sourceValueComboBox.getItems().addAll("Metros", "KM", "Millas");
+                    targetValueComboBox.getItems().addAll("Metros", "KM", "Millas");
+                } else if (conversionType.equals("Temp")) {
+                    sourceValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+                    targetValueComboBox.getItems().addAll("Celsius", "Fahrenheit");
+                } else if (conversionType.equals("Moneda")) {
+                    // Realizar la solicitud HTTP para obtener las tasas de cambio
+                    Task<Void> task = new Task<Void>() {
+                        @Override
+                        protected Void call() {
+                            try {
+                                JSONObject rates = getExchangeRates();
+                                Platform.runLater(() -> {
+                                    if (rates != null) {
+                                        sourceValueComboBox.getItems().addAll(rates.keySet());
+                                        targetValueComboBox.getItems().addAll(rates.keySet());
+                                    }
+                                });
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                    };
+
+                    new Thread(task).start();
+                }
             }
 
             // Verificar si hay elementos en las listas antes de establecer sus valores predeterminados
@@ -66,11 +99,31 @@ public class CalculadoraConversiones implements Initializable {
                 targetValueComboBox.setValue(targetValueComboBox.getItems().get(0));
             }
         } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
+    // Método para obtener tasas de cambio de la API
+    private JSONObject getExchangeRates() throws IOException {
+        URL url = new URL(API_BASE_URL + LATEST_RATES_ENDPOINT);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
 
-
+        int responseCode = connection.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+            return new JSONObject(response.toString()).getJSONObject("rates");
+        } else {
+            System.err.println("Error al obtener tasas de cambio: " + responseCode);
+            return null;
+        }
+    }
 
     @FXML
     private void convert(ActionEvent event) {
@@ -83,12 +136,39 @@ public class CalculadoraConversiones implements Initializable {
 
             if (conversionTypeComboBox.getValue().equals("Longitud")) {
                 result = convertLength(value, fromUnit, toUnit);
-            } else {
+            } else if (conversionTypeComboBox.getValue().equals("Temp")) {
                 result = convertTemperature(value, fromUnit, toUnit);
+            } else {
+                result = convertCurrency(value, fromUnit, toUnit);
             }
             resultLabel.setText(String.format("%.2f %s = %.2f %s", value, fromUnit, result, toUnit));
         } catch (NumberFormatException e) {
             resultLabel.setText("Por favor, ingrese un valor numérico.");
+        }
+    }
+
+    // Métodos de conversión existentes para longitud y temperatura
+
+    private double convertCurrency(double value, String fromCurrency, String toCurrency) {
+        // Obtener tasas de cambio actualizadas
+        try {
+            JSONObject rates = getExchangeRates();
+            if (rates != null) {
+                // Verificar si las claves de moneda existen
+                if (rates.has(fromCurrency) && rates.has(toCurrency)) {
+                    double fromRate = rates.getDouble(fromCurrency);
+                    double toRate = rates.getDouble(toCurrency);
+                    return value * (toRate / fromRate);
+                } else {
+                    // Manejar el caso en que las claves de moneda no existan
+                    throw new IOException("Las claves de moneda no existen.");
+                }
+            } else {
+                throw new IOException("No se pudieron obtener las tasas de cambio.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0; // Manejar el error apropiadamente en tu aplicación
         }
     }
 
@@ -178,9 +258,24 @@ public class CalculadoraConversiones implements Initializable {
         // Actualizar el Label con el texto modificado
 
         conversionTypeComboBox.getItems().clear();
-        if (controlador.getCheckLong().isSelected() && controlador.getCheckTemp().isSelected()){
+        if (controlador.getCheckLong().isSelected() && controlador.getCheckTemp().isSelected() && controlador.getCheckMoneda().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Longitud", "Temp", "Moneda");
+            conversionTypeComboBox.setValue("Longitud");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckLong().isSelected() && controlador.getCheckTemp().isSelected()){
             conversionTypeComboBox.getItems().addAll("Longitud", "Temp");
             conversionTypeComboBox.setValue("Longitud");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckLong().isSelected() && controlador.getCheckMoneda().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Longitud", "Moneda");
+            conversionTypeComboBox.setValue("Longitud");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckTemp().isSelected() && controlador.getCheckMoneda().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Temp", "Moneda");
+            conversionTypeComboBox.setValue("Temp");
             conversionTypeComboBox.setOnAction(event -> updateUnits());
             updateUnits();
         } else if (controlador.getCheckLong().isSelected()){
@@ -191,6 +286,11 @@ public class CalculadoraConversiones implements Initializable {
         } else if (controlador.getCheckTemp().isSelected()){
             conversionTypeComboBox.getItems().addAll("Temp");
             conversionTypeComboBox.setValue("Temp");
+            conversionTypeComboBox.setOnAction(event -> updateUnits());
+            updateUnits();
+        } else if (controlador.getCheckMoneda().isSelected()){
+            conversionTypeComboBox.getItems().addAll("Moneda");
+            conversionTypeComboBox.setValue("Moneda");
             conversionTypeComboBox.setOnAction(event -> updateUnits());
             updateUnits();
         }
