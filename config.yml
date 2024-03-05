@@ -1,3 +1,6 @@
 theme: jekyll-theme-cayman
 title: ProyectoYago
-description: Descripción de tu proyecto aquí
+description: Este es el Proyecto de Yago
+
+plugins:
+  - jekyll-seo-tag
