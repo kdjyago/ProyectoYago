@@ -1,7 +1,7 @@
 # Proyecto Yago: Calculadora
 
 > **Warning**
-> El proyecto contiene un **jar**.
+> Link Github Pages: https://kdjyago.github.io/ProyectoYago/
 
 ## Calculadora Normal
 
